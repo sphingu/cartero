@@ -2,9 +2,11 @@ lockfileVersion: 5.4
 
 specifiers:
   '@felte/solid': ^1.2.6
+  '@types/lodash-es': ^4.17.6
   '@types/uuid': ^9.0.0
   '@zerodevx/svelte-json-view': ^0.2.2
   clsx: ^1.2.1
+  lodash-es: ^4.17.21
   semantic-ui-css: ^2.5.0
   solid-js: ^1.5.1
   solid-styled: ^0.7.4
@@ -19,6 +21,7 @@ dependencies:
   '@felte/solid': 1.2.6_solid-js@1.5.1
   '@zerodevx/svelte-json-view': 0.2.2
   clsx: 1.2.1
+  lodash-es: 4.17.21
   semantic-ui-css: 2.5.0
   solid-js: 1.5.1
   solid-styled: 0.7.4_solid-js@1.5.1
@@ -26,6 +29,7 @@ dependencies:
   uuid: 9.0.0
 
 devDependencies:
+  '@types/lodash-es': 4.17.6
   '@types/uuid': 9.0.0
   typescript: 4.8.2
   vite: 3.0.9
@@ -617,6 +621,16 @@ packages:
     resolution: {integrity: sha512-WulqXMDUTYAXCjZnk6JtIHPigp55cVtDgDrO2gHRwhyJto21+1zbVCtOYB2L1F9w4qCQ0rOGWBnBe0FNTiEJIQ==}
     dev: true
 
+  /@types/lodash-es/4.17.6:
+    resolution: {integrity: sha512-R+zTeVUKDdfoRxpAryaQNRKk3105Rrgx2CFRClIgRGaqDTdjsm8h6IYA8ir584W3ePzkZfst5xIgDwYrlh9HLg==}
+    dependencies:
+      '@types/lodash': 4.14.191
+    dev: true
+
+  /@types/lodash/4.14.191:
+    resolution: {integrity: sha512-BdZ5BCCvho3EIXw6wUCXHe7rS53AIDPLE+JzwgT+OsJk53oBfbSmZZ7CX4VaRoN78N+TJpFi9QPlfIVNmJYWxQ==}
+    dev: true
+
   /@types/uuid/9.0.0:
     resolution: {integrity: sha512-kr90f+ERiQtKWMz5rP32ltJ/BtULDI5RVO0uavn1HQUOwjx0R1h0rnDYNL0CepF1zL5bSY6FISAfd9tOdDhU5Q==}
     dev: true
@@ -1028,6 +1042,10 @@ packages:
     engines: {node: '>=6'}
     hasBin: true
     dev: true
+
+  /lodash-es/4.17.21:
+    resolution: {integrity: sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==}
+    dev: false
 
   /mdn-data/2.0.30:
     resolution: {integrity: sha512-GaqWWShW4kv/G9IEucWScBx9G1/vsFZZJUO+tD26M8J8z3Kw5RDQjaoZe03YAClgeS/SWPOcb4nkFBTEi5DUEA==}

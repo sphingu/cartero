@@ -1,13 +1,60 @@
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  background: url(/src/assets/bg1.jpg) no-repeat center center fixed;
+  background-size: cover;
+}
+#root {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+main {
+  display: flex !important;
+  flex-direction: column;
+  flex-grow: 1;
+  backdrop-filter: blur(5px);
+  box-shadow: 0 0 9px 5px #8e8e8e1f;
+  background-color: #ffffff57;
+  padding: 0.5rem 1rem;
+  margin-bottom: 1rem;
+  margin-top: 5rem;
+  border: 2px solid #ffffff24;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+.blur-container {
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  background-color: #ffffff57;
+  border-radius: 3px;
+  box-shadow: 0 0 9px 5px #8e8e8e1f;
+}
+
+.segment {
+  background-color: #f9fafb30 !important;
+}
+dialog:not([open]) {
+  pointer-events: none;
+  opacity: 0;
+}
+dialog {
+  display: grid;
+  background: #fff;
+  border: none;
+  box-shadow: 1px 3px 3px 0 rgb(0 0 0 / 20%), 1px 3px 15px 2px rgb(0 0 0 / 20%);
+  min-width: 500px;
+  padding: 1.5rem;
+}
+
+::backdrop {
+  background: #17464e5e;
+}
+:focus {
+  outline-offset: 2px;
+  outline: 2px solid #2285d0 !important;
+}
+.list-container {
+  border: 1px solid #ffffff59;
+  box-shadow: 0 0 8px 1px #ffffff52;
+  border-radius: 7px;
+  flex-grow: 1;
+  align-self: normal;
 }

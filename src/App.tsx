@@ -1,7 +1,12 @@
 import type { Component } from "solid-js";
+import { FolderList } from "./components";
 
 const App: Component = () => {
-  return <h1>Hello WOrld ONE MORE</h1>;
+  return (
+    <main class="ui main container">
+      <FolderList />
+    </main>
+  );
 };
 
 export default App;

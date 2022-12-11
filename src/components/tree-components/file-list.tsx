@@ -6,8 +6,6 @@ import { IFile, treeStore } from "../../stores";
 interface Props {
   folderId: string;
   list: IFile[];
-  onAddEdit: (folderId: string, file?: IFile) => void;
-  onDelete: (file: IFile) => void;
 }
 
 export const FileList = (props: Props) => {
@@ -28,7 +26,7 @@ export const FileList = (props: Props) => {
             </div>
             <button
               class="ui primary button"
-              onClick={() => props.onAddEdit(props.folderId)}
+              onClick={() => treeStore.setFormFile({})}
             >
               <i class="icon file outline"></i>
               Create File
@@ -48,26 +46,6 @@ export const FileList = (props: Props) => {
             <div class="content">
               <div style="display: flex; align-items: center; justify-content: space-between;">
                 <div class="header">{file.name}</div>
-                <div class="ui icon buttons mini">
-                  <button
-                    class="ui button primary"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      props.onAddEdit(props.folderId, file);
-                    }}
-                  >
-                    <i class="edit icon"></i>
-                  </button>
-                  <button
-                    class="mini ui button negative"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      props.onDelete(file);
-                    }}
-                  >
-                    <i class="trash icon"></i>
-                  </button>
-                </div>
               </div>
             </div>
           </div>

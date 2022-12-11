@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import { createSignal, For, Show } from "solid-js";
+import { css } from "solid-styled";
 import { IFile, IFolder, treeStore } from "../../stores";
 import { CreateUpdateFileModal } from "./create-update-file-modal";
 import { CreateUpdateFolderModal } from "./create-update-folder-modal";
@@ -9,11 +10,17 @@ interface Props {
   list: IFolder[];
   onAddEditFolder: (folder?: IFolder) => void;
   onDeleteFolder: (folder: IFolder) => void;
-  onAddEditFile: (folderId: string, file?: IFile) => void;
-  onDeleteFile: (file: IFile) => void;
 }
 
 const FolderListUI = (props: Props) => {
+  css`
+    .header {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 150px;
+    }
+  `;
   return (
     <div class="ui middle aligned selection list list-container">
       <For each={props.list}>
@@ -28,7 +35,7 @@ const FolderListUI = (props: Props) => {
               <div style="display: flex; align-items: center; justify-content: space-between;">
                 <div class="header">{folder.name}</div>
                 <div>
-                  <div class="ui icon buttons mini">
+                  <div class="ui icon buttons mini compact">
                     <button
                       class="ui button primary"
                       onClick={(e) => {
@@ -49,17 +56,6 @@ const FolderListUI = (props: Props) => {
                     </button>
                   </div>
                   <button
-                    class="ui labeled icon button mini"
-                    style="margin-left: 1rem;"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      props.onAddEditFile(folder.id);
-                    }}
-                  >
-                    <i class="file icon"></i>
-                    Add File
-                  </button>
-                  <button
                     class="ui button mini compact icon"
                     style="margin-left: 1rem;"
                   >
@@ -79,8 +75,6 @@ const FolderListUI = (props: Props) => {
                 list={treeStore.state.files.filter(
                   (file) => file.folderId === folder.id
                 )}
-                onAddEdit={props.onAddEditFile}
-                onDelete={props.onDeleteFile}
               />
             )}
           </div>
@@ -103,14 +97,6 @@ export const FolderList = () => {
   const onFolderDelete = (folder: IFolder) => {
     if (window.confirm(`Are you sure to delete ${folder.name} ?`)) {
       treeStore.deleteFolder(folder.id);
-    }
-  };
-  const onFileAddEditClick = (folderId: string, file?: IFile) => {
-    setSelectedFile(file || { folderId });
-  };
-  const onFileDelete = (file: IFile) => {
-    if (window.confirm(`Are you sure to delete ${file.name} file?`)) {
-      treeStore.deleteFile(file.id);
     }
   };
 
@@ -148,8 +134,6 @@ export const FolderList = () => {
           list={treeStore.state.folders}
           onAddEditFolder={onFolderAddEditClick}
           onDeleteFolder={onFolderDelete}
-          onAddEditFile={onFileAddEditClick}
-          onDeleteFile={onFileDelete}
         />
       </Show>
 
@@ -157,12 +141,6 @@ export const FolderList = () => {
         <CreateUpdateFolderModal
           initialData={selectedFolder()}
           onClose={() => setSelectedFolder(undefined)}
-        />
-      </Show>
-      <Show when={selectedFile()}>
-        <CreateUpdateFileModal
-          initialData={selectedFile()}
-          onClose={() => setSelectedFile(undefined)}
         />
       </Show>
     </>

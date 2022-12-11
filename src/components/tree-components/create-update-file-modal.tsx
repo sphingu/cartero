@@ -7,17 +7,16 @@ import { PartialRecord } from "../../types";
 import { onMount } from "solid-js";
 
 interface Props {
-  initialData?: Partial<IFile>;
   onClose?: (isSuccess?: boolean) => void;
 }
 
 export const CreateUpdateFileModal = (props: Props) => {
-  const isCreate = !props.initialData?.id;
+  const formFile = treeStore.state.formFile;
+  const isCreate = !formFile?.id;
   const { form, data, errors, isDirty, reset, setData, setInitialValues } =
     createForm<IFile>({
       validate: (values) => {
         const errors: PartialRecord<keyof IFile, string> = {};
-        console.log("values", values);
         if (!values.name) {
           errors.name = "Required !";
         }
@@ -34,33 +33,31 @@ export const CreateUpdateFileModal = (props: Props) => {
         if (isCreate) {
           treeStore.createFile({
             ...values,
-            folderId: props.initialData?.folderId as string,
+            folderId: treeStore.selectedFolder!.id,
             id: uuid(),
           });
           toast.success("File create successfully");
         } else {
-          treeStore.updateFile(props.initialData?.id!, {
+          treeStore.updateFile(formFile.id!, {
             ...values,
-            id: props.initialData?.id,
+            id: formFile.id,
           });
           toast.success("File updated successfully");
         }
         closeDialog(true);
       },
-      initialValues: props.initialData,
+      initialValues: formFile,
     });
 
   function closeDialog(isSuccess: boolean) {
-    window.fileFormDialog.close();
+    if (!isSuccess) {
+      treeStore.setFormFile(undefined);
+    }
     props.onClose && props.onClose(isSuccess);
   }
 
-  onMount(() => {
-    window.fileFormDialog.showModal();
-  });
-
   return (
-    <dialog id="fileFormDialog">
+    <>
       <h1>{isCreate ? "Create" : "Update"} File</h1>
       <form method="dialog" class="ui form fluid" use:form>
         {/* form fields */}
@@ -107,6 +104,6 @@ export const CreateUpdateFileModal = (props: Props) => {
           Close
         </button>
       </form>
-    </dialog>
+    </>
   );
 };

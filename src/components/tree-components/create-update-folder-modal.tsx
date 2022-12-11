@@ -35,7 +35,6 @@ export const CreateUpdateFolderModal = (props: Props) => {
           });
           toast.success("Folder updated successfully");
         }
-        console.log(values);
         closeDialog(true);
       },
       initialValues: props.initialData,

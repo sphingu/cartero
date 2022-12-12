@@ -5,12 +5,14 @@ import "semantic-ui-css/semantic.min.css";
 import "./index.css";
 import App from "./App";
 import { Toaster } from "solid-toast";
-import { Footer, Header } from "./components";
+import { Footer, Header, LocationDialog, LoginDialog } from "./components";
 
 render(
   () => (
     <>
       <Toaster />
+      <LoginDialog />
+      <LocationDialog />
       <Header />
       <App />
       <Footer />

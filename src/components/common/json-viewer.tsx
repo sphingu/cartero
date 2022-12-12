@@ -16,13 +16,16 @@ export const JSONViewer = (props: Props) => {
       target: document.getElementById(id),
       props: {
         json: props.data,
-        // depth: 1,
-        // _lvl: 1,
+        depth: 1,
+        _lvl: 1,
       },
     });
   });
   return (
-    <section style="position: relative;" class="blur-container">
+    <section
+      style="position: relative;flex-grow: 1; max-height: 500px; overflow-y:auto;"
+      class="blur-container"
+    >
       <div class="ui label blue top right attached">
         1
         <a class="detail">

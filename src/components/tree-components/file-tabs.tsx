@@ -1,7 +1,8 @@
 import clsx from "clsx";
 import { isEmpty } from "lodash-es";
 import { For, Show } from "solid-js";
-import { treeStore } from "../../stores";
+import { IFile, treeStore } from "../../stores";
+import { RequestForm } from "../request-form";
 import { CreateUpdateFileModal } from "./create-update-file-modal";
 
 export const FileTabs = () => {
@@ -38,9 +39,12 @@ export const FileTabs = () => {
           </a>
         </div>
       </div>
-      <div class="ui bottom attached segment" style="flex-grow: 1">
+      <div
+        class="ui bottom attached segment"
+        style="display: flex; flex-direction: column; flex-grow: 1"
+      >
         <Show when={treeStore.selectedFile && !treeStore.state.formFile}>
-          <button
+          {/* <button
             class="ui button primary icon"
             onClick={() => treeStore.setFormFile(treeStore.selectedFile)}
           >
@@ -59,7 +63,8 @@ export const FileTabs = () => {
             }}
           >
             <i class="trash icon"></i>
-          </button>
+          </button> */}
+          <RequestForm file={treeStore.selectedFile as IFile} />
         </Show>
         <Show when={treeStore.state.formFile}>
           <CreateUpdateFileModal />

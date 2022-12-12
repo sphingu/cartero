@@ -1,4 +1,6 @@
 import toast, { ToastPosition } from "solid-toast";
+import { loginStore } from "../stores";
+import { locationStore } from "../stores";
 
 const baseUrl = import.meta.env.VITE_API_URL;
 
@@ -37,12 +39,15 @@ export async function makeRequest<T>({
 }: MakeRequestOptions): Promise<T> {
   const id = toast.loading(msgs?.loading || "Requesting...", toastOptions);
 
-  const response = await fetch(`${baseUrl}${url}`, {
-    ...options,
-    method,
-    headers: getHeaders(),
-    body: body ? JSON.stringify(body) : undefined,
-  });
+  const response = await fetch(
+    url.includes("http") ? url : `${baseUrl}${url}`,
+    {
+      ...options,
+      method,
+      headers: getHeaders(),
+      body: body ? JSON.stringify(body) : undefined,
+    }
+  );
 
   const text = await response.text();
 
@@ -59,7 +64,7 @@ export async function makeRequest<T>({
       ...toastOptions,
       id,
     });
-    return data?.data || data;
+    return data;
   }
 
   // error case
@@ -69,10 +74,13 @@ export async function makeRequest<T>({
       ...toastOptions,
       id,
     });
-    setTimeout(() => {
-      //TODO: Implement calling login API later here
-      window.location.reload();
-    }, 1000);
+    loginStore.showLoginForm();
+  } else if (data?.error === "Location-Id Not Provided In Request") {
+    toast.error("Please set location ID", {
+      ...toastOptions,
+      id,
+    });
+    locationStore.toggleLocationForm();
   } else {
     toast.error(`Error: ${response.status}\n${data?.error || text}`, {
       ...toastOptions,
